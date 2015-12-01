@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="http://www.govcert.cz/schema/hlaseniKBI/hlaseniKBI_1.0.xsd"
+  version="1.0">
+  <DegreeProtetionInformation>
+    <ProtectionLevel>Personal</ProtectionLevel>
+    <TLP>AMBER</TLP>
+  </DegreeProtetionInformation>
+  <ContactInfo>
+    <Authority>NBÚ</Authority>
+    <Email>x.admin@nbu.cz</Email>
+    <Phone>+420123456789</Phone>
+  </ContactInfo>
+  <IncidentDetail>
+    <DiscoveryDate>2015-10-12T12:12:12</DiscoveryDate>
+    <IncidentOccurrenceDate>2015-10-12T11:12:12</IncidentOccurrenceDate>
+    <Category>II</Category>
+    <TypeOfIncident>CSI availability</TypeOfIncident>
+    <Classification>Availability</Classification>
+    <Status>Ongoing</Status>
+    <NumberOfAffectedSystems>1</NumberOfAffectedSystems>
+    <NumberOfAffectedUsers>desítky</NumberOfAffectedUsers>
+    <IncidentDescription>Webový server nbu.cz je pod DDOS útokem, který je veden převážně z českých IP adres. Zatím je server schopen zpracovávat většinu požadavků, jelikož dosavadní peak se pohybuje kolem 80 Mbps.</IncidentDescription>
+    <TypeOfReport>Incident</TypeOfReport>
+    <ExtentOfDamage>Zatím minimální</ExtentOfDamage>
+    <AcceptedMeasures>Požádali jsme naše ISP o navýšení propustnosti na lince.</AcceptedMeasures>
+  </IncidentDetail>
+  <SystemDetail>
+    <Host>secure.nbu.cz</Host>
+    <HostFeatures>Web server, Wordpress, Apache, FTP</HostFeatures>
+    <Continuation>Initiation</Continuation>
+    <Port>443</Port>
+    <Protocol>HTTPS</Protocol>
+    <OSVersion>Debian Jessie, Wordpress 4.2, Apache 2.4.17, Nginx 1.9.5 (reversproxy, loadbalancer)</OSVersion>
+    <LocationInArchitecture>DMZ</LocationInArchitecture>
+  </SystemDetail>
+  <SystemDetailSource>
+    <Host>185.48.123.6</Host>
+    <Port>80</Port>
+  </SystemDetailSource>
+  <SystemDetailSource>
+    <Host>185.48.122.25</Host>
+    <Port>35747</Port>
+  </SystemDetailSource>
+  <SystemDetailSource>
+    <Host>185.48.123.7</Host>
+    <Port>80</Port>
+  </SystemDetailSource>
+</Report>
