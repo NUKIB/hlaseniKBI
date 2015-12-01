@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation xml:lang="cz">Schéma definuje formulář pro hlášení kybernetického bezpečnostního incidentu GovCERT.CZ</xs:documentation>
+    <xs:documentation xml:lang="en">This scheme defines the GovCERT.CZ report form for a cyber security incident</xs:documentation>
+    <xs:appinfo>
+      <version>1.0</version>
+    </xs:appinfo>
+  </xs:annotation>
+  <!-- Zakladni Typy -->
+  <xs:simpleType name="STDegreeProtectionInformation">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="Personal">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Osobní - seznam příjemců</xs:documentation>
+          <xs:documentation xml:lang="en">Personal - List of beneficiaries</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Restricted">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Omezená distribuce</xs:documentation>
+          <xs:documentation xml:lang="en">Restricted distribution</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unrestricted">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Neomezeno (veřejné)</xs:documentation>
+          <xs:documentation xml:lang="en">Unrestricted</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="STtlp">
+    <xs:annotation>
+      <xs:documentation xml:lang="cz">TLP - Traffic Light Protocol</xs:documentation>
+      <xs:documentation xml:lang="en">TLP - Traffic Light Protocol</xs:documentation>
+      <xs:documentation xml:lang="en">source: https://www.us-cert.gov/tlp</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="RED">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">RED - Informace výhradně a přímo dána jednotlivým příjemcům. Sdílení (mimo skupinu příjemců) není legitimní</xs:documentation>
+          <xs:documentation xml:lang="en">RED When should it be used?- Sources may use TLP: RED when the information cannot be effectively acted upon by additional parties, and could lead to impacts on a party's privacy, reputation, or operations if misused.</xs:documentation>
+          <xs:documentation xml:lang="en">RED How may it be shared?- Recipients may not share TLP: RED information with any parties outside the specific exchange, meeting, or conversation in which it is originally disclosed.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AMBER">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">AMBER - Informace výlučně věnována organizaci; sdílení omezeno v rámci organizace, které je informace směřována</xs:documentation>
+          <xs:documentation xml:lang="en">AMBER When should it be used?- Sources may use TLP: AMBER when the information requires support in order to be effectively acted upon, but carries risks to privacy, reputation or operations if shared outside of the organizations involved.</xs:documentation>
+          <xs:documentation xml:lang="en">AMBER How may it be shared?- Recipients may only share TLP: AMBER information with members of their own organization who need to know, and only as widely as necessary to act on that information.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="GREEN">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">GREEN - Informace poskytnuté pro komunitu nebo skupiny organizací (CERT/CSIRT týmy). Tyto informace nemohou být zveřejněny.</xs:documentation>
+          <xs:documentation xml:lang="en">GREEN When should it be used?- Sources may use TLP: GREEN when the information is useful for awareness of all participating organizations as well as with peers within the broader community or sector.</xs:documentation>
+          <xs:documentation xml:lang="en">GREEN How may it be shared?- Recipients may share TLP: GREEN information with peers and partner organizations within their sector or community, but not via publicly accessible channels.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WHITE">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">WHITE - Informace mohou být sdíleny veřejně v souladu se zákonem</xs:documentation>
+          <xs:documentation xml:lang="en">WHITE When should it be used?- Sources may use TLP: WHITE when the information carries minimal or no foreseeable risk of misuse, in accordance with applicable rules and procedures for public release.</xs:documentation>
+          <xs:documentation xml:lang="en">WHITE How may it be shared?- TLP: WHITE information may be distributed without restriction, subject to copyright controls.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="STCategory">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="III">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kategorie III – velmi závažný kybernetický bezpečnostní incident</xs:documentation>
+          <xs:documentation xml:lang="en">Category III - very serious cyber security incident</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="II">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kategorie II – závažný kybernetický bezpečnostní incident</xs:documentation>
+          <xs:documentation xml:lang="en">Category II - serious cyber security incident</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="I">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kategorie I – méně závažný kybernetický bezpečnostní incident</xs:documentation>
+          <xs:documentation xml:lang="en">Category I - less serious cyber security incident</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="STTypeOfIncident">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="CSI cyber attack">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobený kybernetickým útokem nebo jinou událostí vedoucí k průniku do systému nebo k omezení dostupnosti služeb.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident caused by a cyber attack or other events resulting into an intrusion into the system or limitation of the availability of services</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI malicious code">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobený škodlivým kódem.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident caused by a malicious code.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI compromised">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobený kompromitací technických opatření.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident caused by a breach of technical measures.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI violation">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobený porušením organizačních opatření.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident caused by a violation of organizational measures.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI APT">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident spojený s projevem trvale působících hrozeb.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident associated with an APT.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Other CSI">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Ostatní kybernetické bezpečnostní incidenty způsobené kybernetickým útokem.</xs:documentation>
+          <xs:documentation xml:lang="en">Other cyber security incidents caused by a cyber attack.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI confidentiality">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobující narušení důvěrnosti primárních aktiv.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident causing disruption in  confidentiality of primary assets.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI integrity">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobující narušení integrity primárních aktiv.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident causing disruption in integrity of primary assets.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI availability">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobující narušení dostupnosti primárních aktiv.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident causing disruption in availability of primary assets.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CSI combination">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident způsobující kombinaci dopadů uvedených shora.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident resulting in a combination of above impacts.</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="STClassification">
+    <xs:annotation>
+      <xs:documentation xml:lang="cz">Upřesnění podle standardu ENISA / eCSIRT.net - Incident Classification</xs:documentation>
+      <xs:documentation xml:lang="cz">zdroj: http://www.ecsirt.net/cec/service/documents/wp4-clearinghouse-policy-v12.html </xs:documentation>
+      <xs:documentation xml:lang="en">ENISA / eCSIRT.net Standart - Incident Classification</xs:documentation>
+      <xs:documentation xml:lang="en">source: http://www.ecsirt.net/cec/service/documents/wp4-clearinghouse-policy-v12.html </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="Abusive Content">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Abusive Content (např. spam, kyberšikana, nevhodný obsah)</xs:documentation>
+          <xs:documentation xml:lang="en">Abusive Content (Spam, Harassment, Child/Sexual/Violence)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Malicious Code">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Malicious Code (např. virus, červ, trojský kůň, dialer, spyware)</xs:documentation>
+          <xs:documentation xml:lang="en">Malicious Code (Virus, Worm, Trojan, Dialer, Spyware)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Information Gathering">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Information Gathering (např. skenování, sniffing, sociální inženýrství)</xs:documentation>
+          <xs:documentation xml:lang="en">Information Gathering (Scanning, Sniffing, Social Engineering)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Intrusions">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Intrusions (např. kompromitace aplikace nebo uživatelského účtu)</xs:documentation>
+          <xs:documentation xml:lang="en">Intrusions (Privileged Account Compromise, Unprivileged Account Compromise, Application Compromise)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Intrusions Attempts">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Intrusion Attempts (např. zneužití zranitelnosti, kompromitace aktiva, 0-day útok)</xs:documentation>
+          <xs:documentation xml:lang="en">Intrusion Attempts (Exploiting of known Vulnerabilities, Login attempts, new attack signature)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Availability">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Availability (např. narušení dostupnosti způsobené DoS/DDoS útokem nebo sabotáží)</xs:documentation>
+          <xs:documentation xml:lang="en">Availability (DoS, DDos, Sabotage)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Information Security">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Information Security (např. neautorizovaný přístup nebo neautorizovaná změna informace, aj.)</xs:documentation>
+          <xs:documentation xml:lang="en">Information Security (Unauthorised access to information)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Fraud">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Fraud (např. neoprávněné využití ICT - porušení licenčních práv, krádež identity, aj.)</xs:documentation>
+          <xs:documentation xml:lang="en">Fraud (Unauthorized use of resources)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Other">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Ostatní</xs:documentation>
+          <xs:documentation xml:lang="en">Other (All incidents which don't fit in one of the given categories should be put into this class)</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="STStatus">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="Ongoing">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Probíhá analýza a šetření kybernetického incidentu</xs:documentation>
+          <xs:documentation xml:lang="en">Ongoing analysis and investigation of cyber incident</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Under control">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kybernetický bezpečnostní incident je pod kontrolou</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident is under control</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Restored">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Dotčené funkce obnoveny</xs:documentation>
+          <xs:documentation xml:lang="en">Affected functions are restored</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unknown">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Neznámý</xs:documentation>
+          <xs:documentation xml:lang="en">Unknown</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="STTypeOfReport">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="Incident">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Incident</xs:documentation>
+          <xs:documentation xml:lang="en">Incident</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Event">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Událost</xs:documentation>
+          <xs:documentation xml:lang="en">Event</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="STContinuation">
+    <xs:restriction base="xs:normalizedString">
+      <xs:enumeration value="Initiation">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Iniciační oznámení</xs:documentation>
+          <xs:documentation xml:lang="en">Initiation announcement</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Continuation">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Pokračování dříve oznámených</xs:documentation>
+          <xs:documentation xml:lang="en">Continuation of the previously announced</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <!-- KONEC Zakladni Typy -->
+  <!-- Skupiny -->
+  <xs:complexType name="TDegreeProtectionInformation">
+    <xs:sequence>
+      <xs:element name="ProtectionLevel" type="STDegreeProtectionInformation"/>
+      <xs:element minOccurs="0" name="TLP" type="STtlp"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TContactInfo">
+    <xs:sequence>
+      <xs:element name="Authority" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Orgán a osoba uvedená v § 3 písm. c) až e) zákona</xs:documentation>
+          <xs:documentation xml:lang="en">Authority and the person referred to in § 3. c) to e)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Email" type="xs:normalizedString"/>
+      <xs:element name="Phone" type="xs:normalizedString"/>
+      <xs:element name="PersonalID" type="xs:normalizedString" minOccurs="0" >
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Identifikátor zadávejte jen tehdy, pokud Vám byl sdělen ze strany GovCERTu (jde o jednoznačný identifikátor orgánu nebo osoby</xs:documentation>
+          <xs:documentation xml:lang="en">Put identifier only if you have been communicated by the GovCERT (it is a unique identifier of a authority or person</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TIncidentDetail">
+    <xs:sequence>
+      <xs:element name="DiscoveryDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Datum a čas zjištění</xs:documentation>
+          <xs:documentation xml:lang="en">Date of discovery</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="IncidentOccurrenceDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Datum a čas výskytu incidentu</xs:documentation>
+          <xs:documentation xml:lang="en">Date of occurrence of the incident</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Category" type="STCategory">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Kategorie incidentu</xs:documentation>
+          <xs:documentation xml:lang="en">Category of the incident</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TypeOfIncident" type="STTypeOfIncident">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Typ incidentu</xs:documentation>
+          <xs:documentation xml:lang="en">Type of the incident</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Classification" type="STClassification">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Upřesnění podle standardu ENISA / eCSIRT.net</xs:documentation>
+          <xs:documentation xml:lang="en">Clarification by standard ENISA / eCSIRT.net</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Status" type="STStatus">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Současný stav zvládání kybernetického bezpečnostního incidentu</xs:documentation>
+          <xs:documentation xml:lang="en">The current state of cyber security incident managing</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfAffectedSystems" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Počet zasažených systémů (odhad)</xs:documentation>
+          <xs:documentation xml:lang="en">The number of affected systems (estimate)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="NumberOfAffectedUsers" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Odhad počtu dotčených uživatelů</xs:documentation>
+          <xs:documentation xml:lang="en">The number of affected users (estimate)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IncidentDescription" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Popis incidentů</xs:documentation>
+          <xs:documentation xml:lang="en">Incident description</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="IncidentID" type="xs:unsignedInt">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Přidělené číslo incidentu (vyplňte, pouze pokud vám bylo přiděleno)</xs:documentation>
+          <xs:documentation xml:lang="en">Assigned of the incident number (fill in only if you have been assigned)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="TypeOfReport" type="STTypeOfReport">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Jde o incident nebo událost</xs:documentation>
+          <xs:documentation xml:lang="en">It is about of an incident or event</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ExtentOfDamage" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Rozsah škod</xs:documentation>
+          <xs:documentation xml:lang="en">Extent of damage</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="AcceptedMeasures" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Jaká opatření byla přijata?</xs:documentation>
+          <xs:documentation xml:lang="en">What measures have been taken?</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TSystemDetail">
+    <xs:sequence>
+      <xs:element name="Host" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Host nebo IP</xs:documentation>
+          <xs:documentation xml:lang="en">Host or IP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="HostFeatures" type="xs:string">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Funkce hosta</xs:documentation>
+          <xs:documentation xml:lang="en">Host features</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Continuation" type="STContinuation">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Návaznost na předchozí hlášení</xs:documentation>
+          <xs:documentation xml:lang="en">Connection to previous announcement</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Port" type="xs:normalizedString"/>
+      <xs:element minOccurs="0" name="Protocol" type="xs:normalizedString"/>
+      <xs:element minOccurs="0" name="OSVersion" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Operační systém a jeho verze</xs:documentation>
+          <xs:documentation xml:lang="en">OS and version</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="LocationInArchitecture" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Umístění systému v architektuře</xs:documentation>
+          <xs:documentation xml:lang="en">Location of the system in the architecture</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TSystemDetailSource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Host" type="xs:normalizedString">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Host nebo IP</xs:documentation>
+          <xs:documentation xml:lang="en">Host or IP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Port" type="xs:normalizedString"/>
+      <xs:element minOccurs="0" name="Protocol" type="xs:normalizedString"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- KONEC Skupiny -->
+  <!-- Hlaseni -->
+  <xs:element name="Report" type="TReport"/>
+  <xs:complexType name="TReport">
+    <xs:sequence>
+      <xs:element name="DegreeProtetionInformation" type="TDegreeProtectionInformation">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Povinné pole</xs:documentation>
+          <xs:documentation xml:lang="en">Mandatory field</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ContactInfo" type="TContactInfo">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Povinné pole</xs:documentation>
+          <xs:documentation xml:lang="en">Mandatory field</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="IncidentDetail" type="TIncidentDetail">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Povinné pole</xs:documentation>
+          <xs:documentation xml:lang="en">Mandatory field</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" name="SystemDetail" type="TSystemDetail">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Povinné pole, které se může opakovat</xs:documentation>
+          <xs:documentation xml:lang="en">Mandatory field, may be repeated</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="SystemDetailSource" type="TSystemDetailSource">
+        <xs:annotation>
+          <xs:documentation xml:lang="cz">Nepovinný popis zdroje/zdrojů útoku</xs:documentation>
+          <xs:documentation xml:lang="en">Optional description/s of the source of attack</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="version" type="xs:normalizedString" use="required"/>
+  </xs:complexType>
+  <!-- KONEC Hlaseni -->
+</xs:schema>
