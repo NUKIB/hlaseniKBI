@@ -297,8 +297,8 @@
       <xs:element name="Phone" type="xs:normalizedString"/>
       <xs:element name="PersonalID" type="xs:normalizedString" minOccurs="0" >
         <xs:annotation>
-          <xs:documentation xml:lang="cz">Identifikátor zadávejte jen tehdy, pokud Vám byl sdělen ze strany GovCERTu (jde o jednoznačný identifikátor orgánu nebo osoby</xs:documentation>
-          <xs:documentation xml:lang="en">Put identifier only if you have been communicated by the GovCERT (it is a unique identifier of a authority or person</xs:documentation>
+          <xs:documentation xml:lang="cz">Identifikátor zadávejte jen tehdy, pokud Vám byl sdělen ze strany GovCERTu (jde o jednoznačný identifikátor orgánu nebo osoby)</xs:documentation>
+          <xs:documentation xml:lang="en">Put identifier only if you have been communicated by the GovCERT (it is a unique identifier of a authority or person)</xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
