@@ -105,7 +105,7 @@
       </xs:enumeration>
       <xs:enumeration value="CSI compromised">
         <xs:annotation>
-          <xs:documentation xml:lang="cs">Kybernetický bezpečnostní incident způsobený kompromitací technických opatření.</xs:documentation>
+          <xs:documentation xml:lang="cs">Kybernetický bezpečnostní incident způsobený překonáním technických opatření.</xs:documentation>
           <xs:documentation xml:lang="en">Cyber security incident caused by a breach of technical measures.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
