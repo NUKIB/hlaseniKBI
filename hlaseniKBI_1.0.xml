@@ -13,8 +13,8 @@
     <Phone>+420123456789</Phone>
   </ContactInfo>
   <IncidentDetail>
-    <DiscoveryDate>2015-10-12T12:12:12</DiscoveryDate>
-    <IncidentOccurrenceDate>2015-10-12T11:12:12</IncidentOccurrenceDate>
+    <DiscoveryDate>2015-10-12T12:12:12+01:00</DiscoveryDate>
+    <IncidentOccurrenceDate>2015-10-12T11:12:12+01:00</IncidentOccurrenceDate>
     <Category>II</Category>
     <TypeOfIncident>CSI availability</TypeOfIncident>
     <Classification>Availability</Classification>
