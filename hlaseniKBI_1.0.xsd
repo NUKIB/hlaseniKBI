@@ -438,7 +438,7 @@
   <xs:element name="Report" type="TReport"/>
   <xs:complexType name="TReport">
     <xs:sequence>
-      <xs:element name="DegreeProtetionInformation" type="TDegreeProtectionInformation">
+      <xs:element name="DegreeProtectionInformation" type="TDegreeProtectionInformation">
         <xs:annotation>
           <xs:documentation xml:lang="cs">Povinné pole</xs:documentation>
           <xs:documentation xml:lang="en">Mandatory field</xs:documentation>
