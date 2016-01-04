@@ -130,7 +130,7 @@
       <xs:enumeration value="CSI confidentiality">
         <xs:annotation>
           <xs:documentation xml:lang="cs">Kybernetický bezpečnostní incident způsobující narušení důvěrnosti primárních aktiv.</xs:documentation>
-          <xs:documentation xml:lang="en">Cyber security incident causing disruption in  confidentiality of primary assets.</xs:documentation>
+          <xs:documentation xml:lang="en">Cyber security incident causing disruption in confidentiality of primary assets.</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="CSI integrity">
@@ -157,7 +157,7 @@
     <xs:annotation>
       <xs:documentation xml:lang="cs">Upřesnění podle standardu ENISA / eCSIRT.net - Incident Classification</xs:documentation>
       <xs:documentation xml:lang="cs">zdroj: http://www.ecsirt.net/cec/service/documents/wp4-clearinghouse-policy-v12.html </xs:documentation>
-      <xs:documentation xml:lang="en">ENISA / eCSIRT.net Standart - Incident Classification</xs:documentation>
+      <xs:documentation xml:lang="en">ENISA / eCSIRT.net Standard - Incident Classification</xs:documentation>
       <xs:documentation xml:lang="en">source: http://www.ecsirt.net/cec/service/documents/wp4-clearinghouse-policy-v12.html </xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:normalizedString">
