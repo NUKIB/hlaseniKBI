@@ -2,11 +2,11 @@
 <Report 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="http://www.govcert.cz/schema/hlaseniKBI/hlaseniKBI_1.0.xsd"
-  version="1.0">
-  <DegreeProtetionInformation>
+  version="1.1">
+  <DegreeProtectionInformation>
     <ProtectionLevel>Personal</ProtectionLevel>
     <TLP>AMBER</TLP>
-  </DegreeProtetionInformation>
+  </DegreeProtectionInformation>
   <ContactInfo>
     <Authority>NBÚ</Authority>
     <Email>x.admin@nbu.cz</Email>
