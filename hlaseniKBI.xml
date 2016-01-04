@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Report 
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="http://www.govcert.cz/schema/hlaseniKBI/hlaseniKBI_1.0.xsd"
+  xsi:noNamespaceSchemaLocation="http://www.govcert.cz/schema/hlaseniKBI/hlaseniKBI_1.1.xsd"
   version="1.1">
   <DegreeProtectionInformation>
     <ProtectionLevel>Personal</ProtectionLevel>
