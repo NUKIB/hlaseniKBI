@@ -5,8 +5,8 @@ Vládní CERT ([GovCERT.CZ](www.govcert.cz)) jako součást Národního centra k
 Schéma je vytvořeno ve formátu XSD a pokrývá veškeré náležitosti formuláře hlášení KBI , které jsou popisovány v příloze č. 5 ve [vyhlášce 316/2014 Sb](https://www.nbu.cz/download/nodeid-1067/). o bezpečnostních opatřeních, kybernetických bezpečnostních incidentech, reaktivních opatřeních a o stanovení náležitostí podání v oblasti kybernetické bezpečnosti (vyhláška o kybernetické bezpečnosti). Navíc obsahuje i položky, které nejsou ve vyhlášce uvedeny, ale přispívají k lepší a efektivnější výměně potřebných informací pro následné řešení, či vyhodnocení hlášené události.
 
 Toto schéma přehledně definuje, jak mají jednotlivá pole formuláře vypadat a v jakém formátu mohou být vyplněna.
-##Vyvoj
-Samotné hlášení v platné a stabilní verzi 1.0 je k dispozici v master větvi. Pro vývoj formulaře hlášení KBI je vytvořená větev next-release.
+##Vývoj
+Samotné hlášení v platné a stabilní verzi 1.0 je k dispozici v master větvi. Pro vývoj formuláře hlášení KBI je vytvořená větev next-release.
 ##Obsah
 - hlaseniKBI.xml
 - hlaseniKBI.xsd
